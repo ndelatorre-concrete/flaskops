@@ -1,0 +1,1 @@
+# Aqui ficarão as classes que vão representar um Pedido, Usuário, Pizza e Ingrediente
