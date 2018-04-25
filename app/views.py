@@ -3,7 +3,7 @@ from app import app
 
 @app.route('/')
 def hello():
-    return 'Benvindos ao FlaskOps'
+    return 'Hello World!'
 
 
 @app.route('/orders')
