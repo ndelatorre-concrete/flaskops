@@ -1,14 +1,9 @@
-# FlaskOps
-
-Uma aplicação REST simples para passar conhecimento de Flask e WebAPI para o time de DevOps da Concrete :)
-
----
-
 # Parte I - Ambiente e roteamento
 
 ###  Admirável ambiente novo - configuração de um novo ambiente ambiente para um novo projeto
 
 * Versão - *pyenv*
+
 A primeira coisa a decidir quando se inicia um novo projeto Python é sua versão. Um fator crucial para essa decisão vem das libs que você utilizará. Raras vezes uma lib (estranha) que você quer usar ainda não é compatível com as últimas versões de Python.
 Felizmente, se você for usar libs de propósito genérico, provavelmente ela já está pronta para executar com as últimas versões de Python. \o/
 Vamos listar as versões de Python que meu `pyenv` possui, e então setar a mais recente:
@@ -28,6 +23,7 @@ Vamos listar as versões de Python que meu `pyenv` possui, e então setar a mais
 ```
 
 * Ambiente virtual - *virtualenv*
+
 Ambientes virtuais são caixinhas de areia para seus apps não brigarem querendo o mesmo brinquedo (lib) de cores (versões) diferentes. Assim que você definir a versão, crie um novo ambiente virtual com `virtualenv`. Não se esqueça de ativar o ambiente virtual, comumentemente feito com `source`. Note que o nome do diretório do ambiente virtual aparece no terminal antes do caret entre parênteses:
 
 ```sh
@@ -42,6 +38,7 @@ Ambientes virtuais são caixinhas de areia para seus apps não brigarem querendo
 ```
 
 * Gerenciador de Pacotes - *pip*
+
 Agora você tem a caixinha (ambiente), mas ainda está sem brinquedos (libs) :(
 Peça um frasco para o `pip`, seu gerenciador de pacotes! Ele cuidará das dependências de todas as libs que você pedir para ele :)
 Give that program a beer!
@@ -151,7 +148,7 @@ Hmm, `flask run` parece subir o Frank:
     Error: Could not locate Flask application. You did not provide the FLASK_APP environment variable.
 ```
 
-Ops, parece que o Flask precisa saber onde está o módulo onde instaciamos o objeto `Flask`. Ele está em `./app.__init__.py`:
+Ops, parece que o Flask precisa saber onde está o módulo onde instaciamos o objeto `Flask`. Ele está em `./app/__init__.py`:
 
 ```sh
     (flaskops) ndelatorre@~/Projects/flaskops - [part_I]
@@ -172,7 +169,9 @@ Ou apenas:
 Teste em:
 
 [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+
 [http://127.0.0.1:5000/orders](http://127.0.0.1:5000/orders)
+
 [http://127.0.0.1:5000/menu](http://127.0.0.1:5000/menu)
 
 ---
