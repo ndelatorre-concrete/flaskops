@@ -85,21 +85,21 @@ Antes de montar o Frank, vamos entender cada peça do "Hello World". Aqui está 
     app = Flask(__name__)   # Instancia um Flask, passando um valor que ele usará para saber onde estão seus arquivos (explico o __name__ numa próxima, ok?)
 
 
-    @app.route("/")  # Faz com que o Flask 'app' execute essa função todas as vezes que ele resolver a rota '/'
+    @app.route('/')  # Faz com que o Flask 'app' execute essa função todas as vezes que ele resolver a rota '/'
     def hello():
-        return "Hello World!"  # retorna um body com 'Hello World!'
+        return 'Hello World!'  # retorna um body com `Hello World!`
 ```
 
 "É só isso?" Sim, é só isso. E agora, teremos mais 2 end-points com os seguintes propósitos:
 
-* Lista e realiza pedidos
+* Lista e realiza pedidos:
 ```python
     @app.route('/orders')
     def orders():
         return 'Lista de pedidos'
 ```
 
-Mostra o cardápio
+* Mostra o cardápio:
 ```python
     @app.route('/menu')
     def menu():
@@ -107,11 +107,73 @@ Mostra o cardápio
 ```
 
 Estamos falando e sendo respondidos \o/
+Porém, ainda apenas no Mundo das Ideias :(
 
-Teste com:
+---
+
+# Haja Luz
+
+Vamos subir o servidor e tentar falar nesses end-points que criamos. Com o `virtualenv` que criamos e instalamos o flask ativado, vamos pedir ajuda à ele:
+
 ```sh
-    FLASK_APP="./app/__init__.py" flask run
+    $ flask --help
+    Usage: flask [OPTIONS] COMMAND [ARGS]...
+
+      This shell command acts as general utility script for Flask applications.
+
+      It loads the application configured (through the FLASK_APP environment
+      variable) and then provides commands either provided by the application or
+      Flask itself.
+
+      The most useful commands are the "run" and "shell" command.
+
+      Example usage:
+
+        $ export FLASK_APP=hello.py
+        $ export FLASK_DEBUG=1
+        $ flask run
+
+    Options:
+      --version  Show the flask version
+      --help     Show this message and exit.
+
+    Commands:
+      run    Runs a development server.
+      shell  Runs a shell in the app context.
 ```
+
+Hmm, `flask run` parece subir o Frank:
+
+```sh
+    $ flask run
+    Usage: flask run [OPTIONS]
+
+    Error: Could not locate Flask application. You did not provide the FLASK_APP environment variable.
+```
+
+Ops, parece que o Flask precisa saber onde está o módulo onde instaciamos o objeto `Flask`. Ele está em `./app.__init__.py`:
+
+```sh
+    (flaskops) ndelatorre@~/Projects/flaskops - [part_I]
+    $ export FLASK_APP=./app/__init__.py
+    (flaskops) ndelatorre@~/Projects/flaskops - [part_I]
+    $ flask run
+     * Serving Flask app "app"
+     * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+
+Ou apenas:
+
+```sh
+    (flaskops) ndelatorre@~/Projects/flaskops - [part_I]
+    $ FLASK_APP="./app/__init__.py" flask run
+```
+
+Teste em:
+
+[http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+[http://127.0.0.1:5000/orders](http://127.0.0.1:5000/orders)
+[http://127.0.0.1:5000/menu](http://127.0.0.1:5000/menu)
 
 ---
 
