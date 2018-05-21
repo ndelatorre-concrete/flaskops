@@ -1,39 +1,37 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, DateTime, Integer, Float, ForeignKey, String
-from sqlalchemy.orm import backref, relationship
 from sqlalchemy.dialects.postgresql import ARRAY
 
-from app.database import Base
+from app.database import db
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(40), nullable=True)
-    password = Column(String(60), nullable=False)
-    email = Column(String(30), unique=True)
-    address = Column(String(40), unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=True)
+    password = db.Column(db.String(60), nullable=False)
+    email = db.Column(db.String(30), unique=True)
+    address = db.Column(db.String(40), unique=True)
 
 
-class Pizza(Base):
+class Pizza(db.Model):
     __tablename__ = 'pizzas'
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(20), nullable=False)
-    price = Column(Float, nullable=False)
-    ingredients = Column(ARRAY(String(20)), unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    ingredients = db.Column(ARRAY(db.String(20)), unique=True)
 
 
-class Order(Base):
+class Order(db.Model):
     __tablename__ = 'orders'
 
-    id = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, nullable=True, default=datetime.now())
-    delivered = Column(Boolean, nullable=False, default=False)
+    id = db.Column(db.Integer, primary_key=True)
+    date_time = db.Column(db.DateTime, nullable=True, default=datetime.now())
+    delivered = db.Column(db.Boolean, nullable=False, default=False)
 
-    pizza_id = Column(Integer, ForeignKey('pizza.id'))
+    pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'))
 
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User', backref=backref('orders', lazy='dynamic'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref=db.backref('orders', lazy='dynamic'))

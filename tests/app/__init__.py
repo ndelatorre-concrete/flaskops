@@ -1,6 +1,10 @@
 from unittest import TestCase
 
-from flask_sqlalchemy import event, SQLAlchemy as db
+from sqlalchemy import event
+
+from app.config import TestConfig
+from app.database import db
+from app.factory import create_app
 
 
 class DatabaseTestCase(TestCase):
@@ -40,8 +44,13 @@ class DatabaseTestCase(TestCase):
 
     def setUp(self):
         super().setUp()
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.init_app(self.app)
         self.__start_transaction()
 
     def tearDown(self):
         super().tearDown()
         self.__close_transaction()
+        self.app_context.pop()

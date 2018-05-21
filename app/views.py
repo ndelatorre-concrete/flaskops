@@ -1,19 +1,16 @@
-from flask.ext.login import login_required
-
-from app import app
+from app import current_app
 
 
-@app.route('/')
+@current_app.route('/')
 def hello():
     return 'Hello World!'
 
 
-@app.route('/orders')
-@login_required
+@current_app.route('/orders')
 def orders():
     return 'Lista de pedidos'
 
 
-@app.route('/menu')
+@current_app.route('/menu')
 def menu():
     return 'Só tem Pepsi'
