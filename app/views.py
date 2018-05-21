@@ -1,3 +1,5 @@
+from flask.ext.login import login_required
+
 from app import app
 
 
@@ -7,6 +9,7 @@ def hello():
 
 
 @app.route('/orders')
+@login_required
 def orders():
     return 'Lista de pedidos'
 
